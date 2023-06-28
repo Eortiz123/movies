@@ -1,0 +1,190 @@
+<p-dialog header="Header" [(visible)]="displayMaximizable"
+[draggable]="true"
+[resizable]="true"
+[modal]="false"
+[style]="{width: '50vw'}"
+>
+
+  <ng-template pTemplate="header">
+    <div class="grip">
+      <div>
+        Películas > Nuevo
+      </div>
+      <h3 class="mb-0">{{ title }} película {{ dataMovieUpdate?.titulo }}</h3>
+      <label class="text-sm">Aqui puede editar la lista de peliculas</label>
+    </div>
+  </ng-template>
+
+  <div class="p-fluid grid">
+    <div class="col-12 md:col-12">
+
+      <div class="p-fluid grid mb-2">
+        <div class="col-12 md:col-12">
+          <h3 class="mb-0 text-500">Detalles de despacho</h3>
+          <label class="text-sm">Se tiene que rellenar los campos que contengan (*) obligatoriamente que se requiere para el registro.</label>
+        </div>
+      </div>
+
+      <div class="p-fluid grid">
+
+            <div class="col-12 md:col-6">
+                <div class="field mb-0">
+                        <label for="">Título <span class="p-error">*</span><i class="pi pi-exclamation-circle ml-2 text-sm" pTooltip="Ingrese el título de la película."></i></label>              
+                        <input type="text" 
+                        pInputText
+                        [(ngModel)]="registerForm.titulo" 
+                        (ngModelChange)="validateFormRegister()"
+                        [ngClass]="{ 'ng-invalid ng-dirty': errorRegisterForm.titulo.error }"
+                        class="p-inputtext-sm">
+                        <div *ngIf="errorRegisterForm.titulo.error" class="p-error block">
+                            <small *ngIf="errorRegisterForm.titulo.required">* Ingrese el título de la película.</small>
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-12 md:col-6">
+                <div class="field mb-0">
+                    <label for="">Dirección <span class="p-error">*</span><i class="pi pi-exclamation-circle ml-2 text-sm" pTooltip="Ingrese la dirección de la película."></i></label>              
+                    <input type="text" 
+                    pInputText
+                    [(ngModel)]="registerForm.direccion" 
+                    (ngModelChange)="validateFormRegister()"
+                    [ngClass]="{ 'ng-invalid ng-dirty': errorRegisterForm.direccion.error }"
+                    class="p-inputtext-sm">
+                    <div *ngIf="errorRegisterForm.direccion.error" class="p-error block">
+                        <small *ngIf="errorRegisterForm.direccion.required">* Ingrese la dirección de la película.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 md:col-4">
+                <div class="field mb-0">
+                    <label for="">Producción <span class="p-error">*</span><i class="pi pi-exclamation-circle ml-2 text-sm" pTooltip="Ingrese la producción de la película."></i></label>              
+                    <input type="text" 
+                    pInputText
+                    [(ngModel)]="registerForm.produccion" 
+                    (ngModelChange)="validateFormRegister()"
+                    [ngClass]="{ 'ng-invalid ng-dirty': errorRegisterForm.produccion.error }"
+                    class="p-inputtext-sm">
+                    <div *ngIf="errorRegisterForm.produccion.error" class="p-error block">
+                        <small *ngIf="errorRegisterForm.produccion.required">* Ingrese la producción de la película.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 md:col-4">
+                <div class="field mb-0">
+                    <label for="">Fotógrafo <span class="p-error">*</span><i class="pi pi-exclamation-circle ml-2 text-sm" pTooltip="Ingrese el nombre del fotógrafo de la película."></i></label>              
+                    <input type="text" 
+                    pInputText
+                    [(ngModel)]="registerForm.fotografo" 
+                    (ngModelChange)="validateFormRegister()"
+                    [ngClass]="{ 'ng-invalid ng-dirty': errorRegisterForm.fotografo.error }"
+                    class="p-inputtext-sm">
+                    <div *ngIf="errorRegisterForm.fotografo.error" class="p-error block">
+                        <small *ngIf="errorRegisterForm.fotografo.required">* Ingrese el nombre del fotógrafo de la película.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 md:col-4">
+                <div class="field mb-0">
+                    <label for="">Vestuario <span class="p-error">*</span><i class="pi pi-exclamation-circle ml-2 text-sm" pTooltip="Ingrese el nombre del personal encargado del vestuario de la película."></i></label>              
+                    <input type="text" 
+                    pInputText
+                    [(ngModel)]="registerForm.vestuario" 
+                    (ngModelChange)="validateFormRegister()"
+                    [ngClass]="{ 'ng-invalid ng-dirty': errorRegisterForm.vestuario.error }"
+                    class="p-inputtext-sm">
+                    <div *ngIf="errorRegisterForm.vestuario.error" class="p-error block">
+                        <small *ngIf="errorRegisterForm.vestuario.required">* Ingrese el nombre del personal encargado del vestuario de la película.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 md:col-12">
+                <div class="field mb-0">
+                    <label for="">Reseña <span class="p-error">*</span><i class="pi pi-exclamation-circle ml-2 text-sm" pTooltip="Ingrese un pequeña reseña de la película."></i></label>
+                    <textarea cols="30" 
+                    [(ngModel)]="registerForm.resena" 
+                    (ngModelChange)="validateFormRegister()"
+                    [ngClass]="{ 'ng-invalid ng-dirty': errorRegisterForm.resena.error }"
+                    class="p-inputtext-sm"
+                    pInputTextarea></textarea>
+                    <div *ngIf="errorRegisterForm.resena.error" class="p-error block">
+                        <small *ngIf="errorRegisterForm.resena.required">* Ingrese un pequeña reseña de la película.</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 md:col-3">
+                <div class="field mb-0">
+                    <label for="">Fecha de estreno <span class="p-error">*</span><i class="pi pi-exclamation-circle ml-2 text-sm" pTooltip="Ingrese o seleccione el estreno de la película."></i></label>
+                    <p-calendar 
+                    [(ngModel)]="registerForm.fechaEstreno" 
+                    (ngModelChange)="validateFormRegister()"
+                    [showIcon]="true" 
+                    inputId="icon" 
+                    [ngClass]="{ 'ng-invalid ng-dirty': errorRegisterForm.fechaEstreno.error }"
+                    appendTo="body"
+                    placeholder="dd/mm/yyyy"
+                    dateFormat="dd/mm/yy"
+                    class="p-inputtext-sm"
+                    [selectOtherMonths]="true"
+                    [showTime]="false"
+                    [showOnFocus]="false"></p-calendar>
+                    <div *ngIf="errorRegisterForm.fechaEstreno.error" class="p-error block">
+                        <small *ngIf="errorRegisterForm.fechaEstreno.required">* Ingrese o seleccione el estreno de la película.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 md:col-3">
+                <div class="field mb-0">
+                    <label for="">País <span class="p-error">*</span><i class="pi pi-exclamation-circle ml-2 text-sm" pTooltip="Seleccione el país de la película."></i></label>              
+                    <p-dropdown 
+                    [options]="listPaises" 
+                    [(ngModel)]="registerForm.pais" 
+                    (ngModelChange)="validateFormRegister()"
+                    placeholder="Select a City" 
+                    optionLabel="label"
+                    [ngClass]="{ 'ng-invalid ng-dirty': errorRegisterForm.pais.error }"
+                    [showClear]="true"
+                    appendTo="body"
+                    class="p-inputtext-sm"></p-dropdown>
+                    <div *ngIf="errorRegisterForm.pais.error" class="p-error block">
+                        <small *ngIf="errorRegisterForm.pais.required">* Seleccione el país de la película.</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 md:col-6">
+                <div class="field mb-0">
+                    <label for="">Tiempo de duración en Minutos <span class="p-error">*</span><i class="pi pi-exclamation-circle ml-2 text-sm" pTooltip="Ingrese el tiempo de duración de la película."></i></label>
+                    <p-inputNumber 
+                    [(ngModel)]="registerForm.duracion" 
+                    (ngModelChange)="validateFormRegister()"
+                    mode="decimal" 
+                    inputId="withoutgrouping" 
+                    [useGrouping]="false"
+                    [ngClass]="{ 'ng-invalid ng-dirty': errorRegisterForm.duracion.error }"
+                    class="p-inputtext-sm">
+                    </p-inputNumber>
+                    <div *ngIf="errorRegisterForm.duracion.error" class="p-error block">
+                        <small *ngIf="errorRegisterForm.duracion.required">* Ingrese el tiempo de duración de la película.</small>
+                    </div>
+                </div>
+            </div>
+
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button  icon="pi pi-times" (click)="displayMaximizable=false" label="Cancelar" styleClass="p-button-text text-default"></p-button>
+    <p-button icon="pi {{delayFormRegister.delay}}" (click)="saveForm()" label="{{ titleButton }}" [disabled]="delayFormRegister.disable"></p-button>
+  </ng-template>
+</p-dialog>
+
+
+

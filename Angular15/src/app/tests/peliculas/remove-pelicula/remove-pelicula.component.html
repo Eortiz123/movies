@@ -1,0 +1,15 @@
+<p-dialog header="Confirmación" [(visible)]="displayRemoveMovie" [modal]="true" [style]="{width:'50vw'}"
+    [draggable]="false" [resizable]="false">
+    <div class="grid p-fluid">
+        <div class="mt-2 mr-2">
+            <i class="pi pi-exclamation-triangle" styleClass="p-confirm-dialog-icon" [style]="{fontSize:'2rem'}"></i>
+        </div>
+        <div class="col-12 md:col-11 mt-2">
+            <span styleClass="p-confirm-dialog-messague">Estas seguro de proceder con la eliminación?</span>
+        </div>
+    </div>
+    <ng-template pTemplate="footer" class="col-12 md:col-12">
+        <p-button icon="pi pi-times" (click)="displayRemoveMovie=false" label="No" styleClass="p-button-text"></p-button>
+        <p-button icon="pi {{delayFormDestroy}}" (click)="removeConfirmMovie()" label="Si"></p-button>
+    </ng-template>
+</p-dialog>

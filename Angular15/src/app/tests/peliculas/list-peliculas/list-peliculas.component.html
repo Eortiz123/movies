@@ -1,0 +1,68 @@
+<p-menubar [model]="listMenus"></p-menubar>
+<p-menu [model]="contextItemsMenuListMovie" #ContextMenu [popup]="true"></p-menu>
+
+<p-divider></p-divider>
+
+<p-table 
+    #dtMovies
+    [value]="listMovies" 
+    [lazy]="true" 
+    styleClass="p-datatable-striped"
+    [loading]="loadedTableMovies"
+    (onLazyLoad)="getListMovies($event)"
+    [responsive]="true"
+    dataKey="id"
+    [rows]="10"
+    [(selection)]="selectedNodeListMovie"
+    [scrollable]="true"
+    [paginator]="true" 
+    [rows]="50" 
+    [showCurrentPageReport]="true" 
+    [tableStyle]="{'min-width': '50rem'}"
+    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas" 
+    [rowsPerPageOptions]="[10,25,50]">
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <button pButton label="Limpiar" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dtMovies)"></button>
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dtMovies.filterGlobal(getNameFilters($event), 'contains')" placeholder="Buscar..." />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th [ngStyle]="{'min-width': '80px', 'max-width': '80px'}">Fecha estreno</th>
+            <th>Nombre</th>
+            <th>Duración</th>
+            <th>Producción</th>
+            <th>Reseña</th>
+            <th>Dirección</th>
+            <th [ngStyle]="{'min-width': '80px', 'max-width': '80px'}"><div class="w-full text-center">Acciones</div></th><th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-node>
+        <tr>
+            <td [ngStyle]="{'min-width': '80px', 'max-width': '80px'}">{{getFormatedFechaEstreno(node.fechaEstreno)}}</td>
+            <td>{{node.titulo}}</td>
+            <td>{{node.duracion}} Min.</td>
+            <td>{{node.produccion}}</td>
+            <td>{{node.resena}}</td>
+            <td>{{node.direccion}}</td>
+            <td [ngStyle]="{'min-width': '80px', 'max-width': '80px'}">
+                <div class="w-full text-center">
+                    <a href="javascript:;" (click)="ContextMenu.toggle($event)" (click)="selectedNodeListMovie = node">
+                        <i class="pi pi-ellipsis-h"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-toast></p-toast>
+<p-toast key="error_bottom" position="bottom-left"></p-toast>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<app-new-pelicula [inputEntityData]="entityDataUpdateNode" (responseEntityData)="mdResponsesMovie($event)"></app-new-pelicula>
+<app-remove-pelicula [inputEntityData]="entityDataRemoveNode" (responseEntityData)="mdResponsesMovie($event)"></app-remove-pelicula>
